@@ -1,0 +1,24 @@
+{
+  "name": "ike",
+  "version": "1.0.0",
+  "description": "The productive node.js framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/go-ike/ike.git"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "framework"
+  ],
+  "author": "Mateus Pinheiro <mateus.pinheiro@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/go-ike/ike/issues"
+  },
+  "homepage": "https://github.com/go-ike/ike#readme"
+}
