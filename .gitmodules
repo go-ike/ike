@@ -1,0 +1,3 @@
+[submodule "ike-base"]
+	path = ike-base
+	url = https://github.com/go-ike/ike-base.git
