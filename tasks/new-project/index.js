@@ -1,6 +1,9 @@
 
 const chalk = require('chalk');
-const log = require('helpers/log.js');
+const fs    = require('fs');
+const log   = require('helpers/log.js');
+
+const createProject = require('./create-project.js');
 
 function newProject(args) {
 	const name = args._[1];
@@ -11,6 +14,12 @@ function newProject(args) {
 		return;
 	}
 
+	if(fs.existsSync(name)) {
+		console.log(chalk.red.bold('The folder ' + name + ' already exists'));
+		return;
+	}
+
+	createProject(name);
 }
 
 module.exports = newProject;
