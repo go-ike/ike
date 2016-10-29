@@ -68,7 +68,11 @@ function createProject(name) {
 	copyfile(basePath + 'app.js', projectPath + 'app.js');
 	log('create', 'app.js');
 
-	copyfile(basePath + 'package.json', projectPath + 'package.json');
+	let packageJson = require(basePath + 'package.json');
+	packageJson.name = name;
+	packageJson.description = "An ike project";
+	packageJson = JSON.stringify(packageJson, null, '\t');
+	fs.writeFileSync(projectPath + 'package.json', packageJson);
 	log('create', 'package.json');
 }
 
