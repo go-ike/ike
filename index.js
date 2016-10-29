@@ -10,7 +10,7 @@ commandMap(args, {
 	'tasks/new-project':
 	['new'],
 
-	'tasks/new-controller':
+	'tasks/generate-controller':
 	['generate controller', 'g controller'],
 
 	'tasks/new-model':
