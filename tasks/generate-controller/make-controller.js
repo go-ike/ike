@@ -2,7 +2,7 @@ const fs        = require("fs");
 const esprima   = require('esprima');
 const escodegen = require('escodegen');
 
-function makeController(name) {
+function makeController(name, functionsArray) {
 	const file = fs.readFileSync(basePath + 'app/controllers/samples.controller.js', 'utf-8');
 	const astOptions = {
 		range: true,
@@ -19,7 +19,7 @@ function makeController(name) {
 	let ast = esprima.parse(file, astOptions);
 
 	ast = setControllerName(ast, name);
-	ast = createFunctions(ast, name, ['index', 'create', 'remove', 'list']);
+	ast = createFunctions(ast, name, functionsArray);
 
 	// Create the js file from the modified AST
 	let code = escodegen.attachComments(ast, ast.comments, ast.tokens);
@@ -46,7 +46,7 @@ function createFunctions(ast, controllerName, functionNameArray) {
 	controllerName = controllerName.toLowerCase();
 
 	for (let functionName of functionNameArray) {
-		let func = (JSON.parse(JSON.stringify(functionBlock)));;
+		let func = (JSON.parse(JSON.stringify(functionBlock)));
 
 		func.key.name = functionName;
 		func.value.body.body[1].expression.arguments[0].value = controllerName + '/' + functionName;
