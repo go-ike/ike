@@ -1,6 +1,6 @@
 {
   "name": "ike",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The productive node.js framework",
   "main": "index.js",
   "bin": {
