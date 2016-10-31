@@ -40,6 +40,17 @@ function createProject(name) {
 	copydir.sync(basePath + 'app/views/layout', projectPath + 'app/views/layout');
 	log('create', 'layout/', 2);
 
+
+	/** ##########
+	    BIN
+	    ########## */
+	fs.mkdirSync(projectPath + 'bin/');
+	copydir.sync(basePath + 'bin/', projectPath + 'bin/');
+	//console.log(projectPath + 'bin/start.sh');
+	fs.chmodSync(projectPath + 'bin/production.sh', 0755);
+	fs.chmodSync(projectPath + 'bin/development.sh', 0755);
+	log('create', 'bin/');
+
 	/** ##########
 	    OTHER FOLDERS
 	    ########## */
