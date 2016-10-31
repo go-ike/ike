@@ -4,6 +4,8 @@ const pluralize = require('pluralize');
 const chalk = require('chalk');
 const log = apprequire('helpers/log.js');
 
+//decamelize file name
+
 const validateController = require('./validate.js');
 const makeController = require('./make-controller.js');
 const makeRoutes = require('./make-routes.js');

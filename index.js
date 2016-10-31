@@ -18,6 +18,6 @@ commandMap(args, {
 	'tasks/generate-controller':
 	['generate controller', 'g controller'],
 
-	'tasks/new-model':
+	'tasks/generate-model':
 	['generate model', 'g model']
 });
