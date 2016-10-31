@@ -1,8 +1,9 @@
-const fs         = require("fs");
+const fs         = require('fs');
 const esprima    = require('esprima');
 const escodegen  = require('escodegen');
 const camelcase  = require('camelcase');
 const decamelize = require('decamelize');
+const normalize  = apprequire('helpers/normalize');
 
 function makeController(name, functionsArray) {
 	const file = fs.readFileSync(basePath + 'app/controllers/samples.controller.js', 'utf-8');
@@ -31,7 +32,7 @@ function makeController(name, functionsArray) {
 }
 
 function setControllerName(ast, name) {
-	name = name + 'Controller';
+	name = normalize.controllerClassName(name);
 
 	// Change the class name
 	ast.body[0].id.name = name;
@@ -43,15 +44,17 @@ function setControllerName(ast, name) {
 }
 
 function createFunctions(ast, controllerName, functionNameArray) {
-	let classBody = ast.body[0].body.body;
-	const functionBlock = ast.body[0].body.body[0];
-	controllerName = controllerName.toLowerCase();
+	const controllerFolderName = normalize.controllerFileName(controllerName);
+	const functionBlock        = ast.body[0].body.body[0];
+	let   classBody            = ast.body[0].body.body;
 
 	for (let functionName of functionNameArray) {
+		functionName = normalize.functionName(functionName);
 		let func = (JSON.parse(JSON.stringify(functionBlock)));
+		let viewRelativeFilePath = normalize.viewRelativeFilePath(functionName, controllerName);
 
 		func.key.name = functionName;
-		func.value.body.body[1].expression.arguments[0].value = controllerName + '/' + normalizeViewFileName(functionName);
+		func.value.body.body[1].expression.arguments[0].value = viewRelativeFilePath;
 
 		classBody.push(func);
 	}
@@ -59,14 +62,6 @@ function createFunctions(ast, controllerName, functionNameArray) {
 	classBody.splice(0, 1);
 
 	return ast;
-}
-
-function normalizeFunctionName(name) {
-	return camelcase(name);	
-}
-
-function normalizeViewFileName(name) {
-	return decamelize(name);
 }
 
 module.exports = makeController;

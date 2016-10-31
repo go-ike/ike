@@ -1,6 +1,7 @@
 const fs        = require("fs");
 const esprima   = require('esprima');
 const escodegen = require('escodegen');
+const normalize = apprequire('helpers/normalize');
 
 function makeRoutes(name, routes) {
 	const baseFile = fs.readFileSync(basePath + 'config/routes.js', 'utf-8');
@@ -49,22 +50,27 @@ function makeRoutes(name, routes) {
 }
 
 function makeControllerRequire(baseFileAst, name) {
+	const controllerClassName = normalize.controllerClassName(name);
+	const controllerRelativePath = normalize.controllerRelativePath(name);
 	let controllerRequire = (JSON.parse(JSON.stringify(baseFileAst.body[2])));
 
-	controllerRequire.declarations[0].id.name = name + 'Controller';
-	controllerRequire.declarations[0].init.callee.arguments[0].value = name.toLowerCase() + '.controller';
+	controllerRequire.declarations[0].id.name = controllerClassName;
+	controllerRequire.declarations[0].init.callee.arguments[0].value = controllerRelativePath;
 
 	return controllerRequire;
 }
 
 function makeRoutesBlock(baseFileAst, controllerName, routes) {
+	const controllerClassName = normalize.controllerClassName(controllerName);
+	controllerName = normalize.controllerName(controllerName);
+
 	let routeDeclaration = baseFileAst.body[3];
 	let newRoutes = [];
 
 	for (let routeName of routes) {
 		let route = (JSON.parse(JSON.stringify(routeDeclaration)));
-		route.expression.arguments[0].value = controllerName.toLowerCase() + '/' + routeName;
-		route.expression.arguments[1].object.name = controllerName + 'Controller';
+		route.expression.arguments[0].value = controllerName + '/' + routeName;
+		route.expression.arguments[1].object.name = controllerClassName;
 		route.expression.arguments[1].property.name = routeName;
 
 		newRoutes.push(route);

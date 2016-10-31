@@ -1,28 +1,21 @@
-
-const fs = require('fs');
-const pluralize = require('pluralize');
-const chalk = require('chalk');
-const log = apprequire('helpers/log.js');
-
-//decamelize file name
-
+const fs                 = require('fs');
+const pluralize          = require('pluralize');
+const chalk              = require('chalk');
+const log                = apprequire('helpers/log');
+const normalize          = apprequire('helpers/normalize');
 const validateController = require('./validate.js');
-const makeController = require('./make-controller.js');
-const makeRoutes = require('./make-routes.js');
-const makeView = require('./make-views.js');
+const makeController     = require('./make-controller.js');
+const makeRoutes         = require('./make-routes.js');
+const makeView           = require('./make-views.js');
 
 function generateController(args) {
-	let controllerName = normalizeControllerName(args._[2]);
-	let functionsArray = args._.slice(3);
+	const controllerName     = normalize.controllerClassName(args._[2]);
+	const controllerFileName = normalize.controllerFileName(args._[2]);
+	const controllerFilePath = normalize.controllerFilePath(args._[2]);
+	const routesFilePath     = normalize.routesFilePath();
+	const functionsArray     = args._.slice(3);
 
-	let controllerFileName = normalizeFileName(controllerName);
-	let controllerFilePath = process.cwd() + '/app/controllers/' + controllerFileName;
-	
-	let routesFilePath = process.cwd() + '/config/routes.js';
-
-	if(!validateController(controllerName, functionsArray, args)) {
-		return;
-	}
+	if(!validateController(controllerName, functionsArray, args)) return;
 
 	const controllerCode = makeController(controllerName, functionsArray);
 	fs.writeFileSync(controllerFilePath, controllerCode);
@@ -33,7 +26,6 @@ function generateController(args) {
 	log('modified', 'config/routes.js');
 
 	makeView(controllerName, functionsArray);
-
 }
 
 function normalizeControllerName(name) {
