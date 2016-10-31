@@ -62,7 +62,7 @@ function createProject(name) {
 	/** ##########
 	    FILES
 	    ########## */
-	copyfile(basePath + '.gitignore', projectPath + '.gitignore');
+	copyfile(basePath + 'gitignore', projectPath + '.gitignore');
 	log('create', '.gitignore');
 
 	copyfile(basePath + 'app.js', projectPath + 'app.js');
