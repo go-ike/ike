@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-require('app-module-path').addPath(__dirname);
+global.apprequire = function(fileName) { return require(__dirname + '/' + fileName)};
+
 const commandMap = require('./helpers/command-map.js');
 const args       = require('minimist')(process.argv.slice(2));
 

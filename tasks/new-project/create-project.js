@@ -1,9 +1,9 @@
 
 const fs       = require('fs');
-const log      = require('helpers/log');
+const log      = apprequire('helpers/log');
 const touch    = require('touch');
 const copydir  = require('copy-dir');
-const copyfile = require('helpers/copy-file-sync');
+const copyfile = apprequire('helpers/copy-file-sync');
 
 function createProject(name) {
 	// Create project folder

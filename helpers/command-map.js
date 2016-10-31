@@ -8,7 +8,7 @@ function commandMap(args, map) {
 		if (!map.hasOwnProperty(task)) continue;
 
 		if (interpret(map[task], command)) {
-			require(task)(args);
+			apprequire(task)(args);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 
 const chalk = require('chalk');
 const fs    = require('fs');
-const log   = require('helpers/log.js');
+const log   = apprequire('helpers/log.js');
 
 const createProject = require('./create-project.js');
 

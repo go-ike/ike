@@ -1,5 +1,5 @@
 const fs = require("fs");
-const log = require('../../helpers/log.js');
+const log = apprequire('helpers/log.js');
 
 function makeViews(controllerName, routes) {
 	const baseView  = fs.readFileSync(basePath + 'app/views/sample/index.html', 'utf-8');

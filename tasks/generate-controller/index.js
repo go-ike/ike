@@ -2,7 +2,7 @@
 const fs = require('fs');
 const pluralize = require('pluralize');
 const chalk = require('chalk');
-const log = require('../../helpers/log.js');
+const log = apprequire('helpers/log.js');
 
 const makeController = require('./make-controller.js');
 const makeRoutes = require('./make-routes.js');
