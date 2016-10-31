@@ -1,6 +1,8 @@
-const fs        = require("fs");
-const esprima   = require('esprima');
-const escodegen = require('escodegen');
+const fs         = require("fs");
+const esprima    = require('esprima');
+const escodegen  = require('escodegen');
+const camelcase  = require('camelcase');
+const decamelize = require('decamelize');
 
 function makeController(name, functionsArray) {
 	const file = fs.readFileSync(basePath + 'app/controllers/samples.controller.js', 'utf-8');
@@ -49,7 +51,7 @@ function createFunctions(ast, controllerName, functionNameArray) {
 		let func = (JSON.parse(JSON.stringify(functionBlock)));
 
 		func.key.name = functionName;
-		func.value.body.body[1].expression.arguments[0].value = controllerName + '/' + functionName;
+		func.value.body.body[1].expression.arguments[0].value = controllerName + '/' + normalizeViewFileName(functionName);
 
 		classBody.push(func);
 	}
@@ -57,6 +59,14 @@ function createFunctions(ast, controllerName, functionNameArray) {
 	classBody.splice(0, 1);
 
 	return ast;
+}
+
+function normalizeFunctionName(name) {
+	return camelcase(name);	
+}
+
+function normalizeViewFileName(name) {
+	return decamelize(name);
 }
 
 module.exports = makeController;
