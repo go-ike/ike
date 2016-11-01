@@ -40,7 +40,6 @@ function createProject(name) {
 	copydir.sync(basePath + 'app/views/layout', projectPath + 'app/views/layout');
 	log('create', 'layout/', 2);
 
-
 	/** ##########
 	    BIN
 	    ########## */
@@ -51,12 +50,34 @@ function createProject(name) {
 	log('create', 'bin/');
 
 	/** ##########
-	    OTHER FOLDERS
+	    CONFIG
 	    ########## */
 	fs.mkdirSync(projectPath + 'config/');
-	copydir.sync(basePath + 'config/', projectPath + 'config/');
 	log('create', 'config/');
+	
+	fs.mkdirSync(projectPath + 'config/environments');
+	copydir.sync(basePath + 'config/environments', projectPath + 'config/environments');
+	log('create', 'environments/', 1);
 
+	fs.mkdirSync(projectPath + 'config/initializers');
+	copydir.sync(basePath + 'config/initializers', projectPath + 'config/initializers');
+	log('create', 'initializers/', 1);
+
+	copyfile(basePath + 'config/application.yml', projectPath + 'config/application.yml');
+	log('create', 'application.yml', 1);
+
+	copyfile(basePath + 'config/database.yml', projectPath + 'config/database.yml');
+	log('create', 'database.yml', 1);
+
+	copyfile(basePath + 'config/ike.yml', projectPath + 'config/ike.yml');
+	log('create', 'ike.yml', 1);
+
+	copyfile(basePath + 'config/blank-routes.js', projectPath + 'config/routes.js');
+	log('create', 'routes.js', 1);
+
+	/** ##########
+	    OTHER FOLDERS
+	    ########## */
 	fs.mkdirSync(projectPath + 'gulpfile.js/');
 	copydir.sync(basePath + 'gulpfile.js/', projectPath + 'gulpfile.js/');
 	log('create', 'gulpfile.js/');
