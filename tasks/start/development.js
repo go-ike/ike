@@ -24,11 +24,4 @@ function development(args) {
 	});
 }
 
-function puts(error, stdout, stderr) {
-	console.log('aqui');
-	console.log(stdout);
-	console.log(stderr);
-	console.log(error);
-}
-
 module.exports = development;
