@@ -13,9 +13,11 @@ function development(folderName) {
     
     proc.on('close', function (code) {
       if (code !== 0) {
-        console.log('13 memo caraio');
+        console.log(chalk.red.bold('Something went wrong.'));
+        console.log('Try running \'npm install\' on the project folder');
       } else {
-      	console.log('birl');
+      	console.log(chalk.bgGreen.white.bold('All set!'));
+      	console.log('Go to your project directory and \'ike start\' it');
       }
     });
 }
