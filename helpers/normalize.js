@@ -34,7 +34,7 @@ function controllerFileName(name) {
 
 module.exports.controllerRelativePath = controllerRelativePath;
 function controllerRelativePath(name) {
-	return 'controllers/' + controllerName(name);
+	return 'controllers/' + controllerName(name) + '.controller';
 }
 
 module.exports.controllerFilePath = controllerFilePath;

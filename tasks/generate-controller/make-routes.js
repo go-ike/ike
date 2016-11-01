@@ -55,7 +55,7 @@ function makeControllerRequire(baseFileAst, name) {
 	let controllerRequire = (JSON.parse(JSON.stringify(baseFileAst.body[2])));
 
 	controllerRequire.declarations[0].id.name = controllerClassName;
-	controllerRequire.declarations[0].init.callee.arguments[0].value = controllerRelativePath;
+	controllerRequire.declarations[0].init.arguments[0].value = controllerRelativePath;
 
 	return controllerRequire;
 }
@@ -69,7 +69,7 @@ function makeRoutesBlock(baseFileAst, controllerName, routes) {
 
 	for (let routeName of routes) {
 		let route = (JSON.parse(JSON.stringify(routeDeclaration)));
-		route.expression.arguments[0].value = controllerName + '/' + routeName;
+		route.expression.arguments[0].value = '/' + controllerName + '/' + routeName;
 		route.expression.arguments[1].object.name = controllerClassName;
 		route.expression.arguments[1].property.name = routeName;
 
