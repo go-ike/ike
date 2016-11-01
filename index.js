@@ -19,5 +19,8 @@ commandMap(args, {
 	['generate controller', 'g controller'],
 
 	'tasks/generate-model':
-	['generate model', 'g model']
+	['generate model', 'g model'],
+
+	'tasks/start':
+	['start']
 });
