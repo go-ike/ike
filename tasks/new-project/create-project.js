@@ -48,7 +48,6 @@ function createProject(name) {
 	copydir.sync(basePath + 'bin/', projectPath + 'bin/');
 	fs.chmodSync(projectPath + 'bin/production.sh', 0755);
 	fs.chmodSync(projectPath + 'bin/development.sh', 0755);
-	fs.chmodSync(projectPath + 'bin/install.sh', 0755);
 	log('create', 'bin/');
 
 	/** ##########
