@@ -1,9 +1,9 @@
-
 const chalk = require('chalk');
 const fs    = require('fs');
 const log   = apprequire('helpers/log.js');
 
 const createProject = require('./create-project.js');
+const npmInstall = require('./npm-install.js');
 
 function newProject(args) {
 	const name = args._[1];
@@ -20,6 +20,7 @@ function newProject(args) {
 	}
 
 	createProject(name);
+	npmInstall(name);
 }
 
 module.exports = newProject;
